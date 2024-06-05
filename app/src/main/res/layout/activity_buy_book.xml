@@ -90,7 +90,7 @@
                 android:padding="5dp"
                 android:textSize="20dp"/>
         </TableRow>
-
+<!--
         <TextView
             android:id="@+id/tvt_b_category"
             android:layout_width="match_parent"
@@ -118,6 +118,7 @@
             android:layout_margin="10dp"
             android:padding="5dp"
             android:textSize="20dp"/>
+-->
 
         <TableRow
             android:layout_width="match_parent"

@@ -18,6 +18,26 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
     ActivityTeacherBookDetailBinding binding;
 
     @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        binding = ActivityTeacherBookDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        Intent intent = getIntent();
+        int id_book = intent.getIntExtra("id_book", 0);
+        Book cBook = LibAppDatabase.getInstance(this).bookDAO().getBookById(id_book);
+        binding.editBookName.setText(cBook.getName());
+        binding.editBookYear.setText(cBook.getPublish_date());
+        binding.editBookAuthor.setText(cBook.getAuthor());
+        binding.editPublishComp.setText(cBook.getPublish_comp());
+        binding.editBookType.setText(cBook.getType());
+        binding.editBookCategory.setText(cBook.getCategory());
+        binding.editBookFaculty.setText(cBook.getFaculty());
+        binding.editBookQualityStock.setText(String.valueOf(cBook.getQuality_stock()));
+        binding.editBookQualityBorrow.setText(String.valueOf(cBook.getQuality_borrow()));
+        binding.editBookPrice.setText(String.valueOf(cBook.getPrice()));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTeacherBookDetailBinding.inflate(getLayoutInflater());

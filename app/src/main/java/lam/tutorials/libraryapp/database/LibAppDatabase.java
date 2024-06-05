@@ -8,15 +8,16 @@ import androidx.room.RoomDatabase;
 
 import lam.tutorials.libraryapp.entity.*;
 
-@Database(entities = {User.class,Book.class, Form.class},version = 1)
+@Database(entities = {User.class,Book.class, Form.class},version = 2)
 public abstract class LibAppDatabase extends RoomDatabase {
 
-    private static final String DATABASE_NAME = "libapp.dp";
+    private static final String DATABASE_NAME = "libraryapp.dp";
     private static LibAppDatabase instance;
 
     public static synchronized LibAppDatabase getInstance(Context context) {
         if(instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),LibAppDatabase.class, DATABASE_NAME)
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();
         }

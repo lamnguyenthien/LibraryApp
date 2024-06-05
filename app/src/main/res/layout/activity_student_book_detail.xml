@@ -150,7 +150,7 @@
                 android:layout_marginRight="5dp"/>
 
             <Button
-                android:id="@+id/btnDeleteBook"
+                android:id="@+id/btnBorrowBook"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"

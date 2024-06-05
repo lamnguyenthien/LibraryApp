@@ -19,18 +19,15 @@ public class StudentMainActivity extends AppCompatActivity {
 
     ActivityStudentMainBinding binding;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStudentMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Bundle extras = getIntent().getExtras();
-
         int id_user = extras.getInt("id_user", 0); // Đặt giá trị mặc định nếu không có
         String name_user = extras.getString("name_user");
         binding.toolbarGreet.setTitle("Xin chào, " + name_user);
-
         replaceFragment(new ManageFormFragment());
         binding.bottomNavigationView.setBackground(null);
 
@@ -38,7 +35,7 @@ public class StudentMainActivity extends AppCompatActivity {
 
             Bundle bundle = new Bundle();
             bundle.putInt("id_user", id_user);
-            if (item.getItemId() == R.id.formregis) {
+            if (item.getItemId() == R.id.formregis ) {
                 RegisFormFragment regisFormFragment = new RegisFormFragment();
                 regisFormFragment.setArguments(bundle);
                 replaceFragment(regisFormFragment);
