@@ -28,7 +28,12 @@ public class StudentMainActivity extends AppCompatActivity {
         int id_user = extras.getInt("id_user", 0); // Đặt giá trị mặc định nếu không có
         String name_user = extras.getString("name_user");
         binding.toolbarGreet.setTitle("Xin chào, " + name_user);
-        replaceFragment(new ManageFormFragment());
+
+        Bundle bundle_create = new Bundle();
+        bundle_create.putInt("id_user", id_user);
+        RegisFormFragment regisFormFragment_create = new RegisFormFragment();
+        regisFormFragment_create.setArguments(bundle_create);
+        replaceFragment(regisFormFragment_create);
         binding.bottomNavigationView.setBackground(null);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {

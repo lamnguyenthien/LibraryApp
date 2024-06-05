@@ -14,7 +14,10 @@ public interface FormDAO {
     void insertForm(Form form);
 
     @Query("SELECT * FROM Form")
-    List<Form> getListLoanForm();
+    List<Form> getListForm();
+
+    @Query("SELECT * FROM Form WHERE id_user = :id_user")
+    List<Form> getListFormByIdUser(int id_user);
 
     @Query("DELETE FROM Form")
     void deleteAllForm();

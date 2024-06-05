@@ -18,6 +18,7 @@ import lam.tutorials.libraryapp.fragment.AccountFragment;
 import lam.tutorials.libraryapp.fragment.ManageBookFragment;
 import lam.tutorials.libraryapp.fragment.ManageFormFragment;
 import lam.tutorials.libraryapp.R;
+import lam.tutorials.libraryapp.fragment.RegisFormFragment;
 
 public class TeacherMainActivity extends AppCompatActivity {
 
@@ -33,7 +34,13 @@ public class TeacherMainActivity extends AppCompatActivity {
         int id_user = extras.getInt("id_user", 0); // Đặt giá trị mặc định nếu không có
         String name_user = extras.getString("name_user");
         binding.toolbarGreet.setTitle("Xin chào, " + name_user);
-        replaceFragment(new ManageFormFragment());
+
+
+        Bundle bundle_create = new Bundle();
+        bundle_create.putInt("id_user", id_user);
+        ManageFormFragment manageFormFragment_create = new ManageFormFragment();
+        manageFormFragment_create.setArguments(bundle_create);
+        replaceFragment(manageFormFragment_create);
         binding.bottomNavigationView.setBackground(null);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {

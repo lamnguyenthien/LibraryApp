@@ -48,8 +48,6 @@ public class SignupActivity extends AppCompatActivity {
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
                                 nUser = new User("2021604260", "tranduchuy@gmail.com", "Trần Đức Huy", "Student", "123456");
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
-                                nUser = new User("2021604261", "dohavi@gmail.com", "Đỗ Hà Vi", "Student", "123456");
-                                LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
                                 nUser = new User("2021604263", "nguyenminhhieu@gmail.com", "Nguyễn Minh Hiếu", "Student", "123456");
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
                                 nUser = new User("2021604264", "trinhgialoc@gmail.com", "Trịnh Gia Lộc", "Student", "123456");

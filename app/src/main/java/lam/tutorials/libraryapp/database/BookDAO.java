@@ -28,6 +28,9 @@ public interface BookDAO {
     @Query("SELECT * FROM book WHERE id = :id")
     Book getBookById(int id);
 
+    @Query("SELECT name FROM book WHERE id = :id")
+    String getNameBookById(int id);
+
 
     @Query("SELECT * FROM book WHERE name = :name AND publish_date = :publish_date " +
             "AND publish_comp = :publish_comp AND author = :author")
