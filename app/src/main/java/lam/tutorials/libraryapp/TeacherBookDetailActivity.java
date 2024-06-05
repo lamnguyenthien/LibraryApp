@@ -18,8 +18,8 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
     ActivityTeacherBookDetailBinding binding;
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         binding = ActivityTeacherBookDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Intent intent = getIntent();
@@ -58,9 +58,9 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
         binding.btnDeleteBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Book dBook = LibAppDatabase.getInstance(TeacherBookDetailActivity.this).bookDAO().getBookById(id_book);
-                LibAppDatabase.getInstance(TeacherBookDetailActivity.this).bookDAO().deleteBook(dBook);
-                Toast.makeText(TeacherBookDetailActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                Book dBook = LibAppDatabase.getInstance(getApplicationContext()).bookDAO().getBookById(id_book);
+                LibAppDatabase.getInstance(getApplicationContext()).bookDAO().deleteBook(dBook);
+                Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), ManageBookFragment.class);
                 startActivity(intent);
             }
@@ -83,7 +83,7 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
                 if(book_name.equals("")||book_date.equals("")||book_author.equals("")||price.equals("")||
                    book_comp.equals("")||book_type.equals("")||book_category.equals("")||
                    book_faculty.equals("")||quality_borrow.equals("")||quality_stock.equals("")) {
-                    Toast.makeText(TeacherBookDetailActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }else{
                     int stock = Integer.parseInt(quality_stock);
                     int borrow = Integer.parseInt(quality_borrow);
@@ -98,16 +98,16 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
                     oBook.setQuality_borrow(borrow);
                     oBook.setQuality_stock(stock);
                     oBook.setPrice(price_book);
-                    LibAppDatabase.getInstance(TeacherBookDetailActivity.this).bookDAO().updateBook(oBook);
-                    Toast.makeText(TeacherBookDetailActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                    LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(oBook);
+                    Toast.makeText(getApplicationContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+        binding.btnBackTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ManageBookFragment.class);
+                Intent intent = new Intent(getApplicationContext(), TeacherMainActivity.class);
                 startActivity(intent);
             }
         });

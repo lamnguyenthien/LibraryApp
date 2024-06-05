@@ -18,7 +18,7 @@
             android:text="Quay về"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:id="@+id/btnBack"/>
+            android:id="@+id/btnBackTeacher"/>
 
         <TextView
             android:layout_width="match_parent"

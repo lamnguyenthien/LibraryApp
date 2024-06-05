@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/lavender"
+    android:background="@color/white"
     tools:context=".fragment.FindBookFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/lavender_border"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp">
+        android:layout_marginBottom="75dp"
+        android:padding="5dp">
 
         <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"

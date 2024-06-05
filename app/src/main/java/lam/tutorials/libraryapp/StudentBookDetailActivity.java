@@ -24,15 +24,7 @@ public class StudentBookDetailActivity extends AppCompatActivity {
         int id_user = intent.getIntExtra("id_student",0);
         Book book = LibAppDatabase.getInstance(this).bookDAO().getBookById(id_book);
         User user = LibAppDatabase.getInstance(this).userDAO().getUserById(id_user);
-        binding.tvtBName.setText("Tên sách: " + book.getName());
-        binding.tvtBAuthor.setText("Tác giả: " + book.getAuthor());
-        binding.tvtBPublishComp.setText("NXB: " + book.getPublish_comp());
-        binding.tvtBPublishYear.setText("Năm: " + book.getPublish_date());
-        binding.tvtBType.setText("Loại: " + book.getType());
-        binding.tvtBCategory.setText("Thể loại: " + book.getCategory());
-        binding.tvtBFaculty.setText("Ngành: " + book.getFaculty());
         binding.tvtBookStock.setText("Còn: " + book.getQuality_stock());
-        binding.tvtBookPrice.setText("Giá: " + book.getPrice() + " VND");
     }
 
     @Override
