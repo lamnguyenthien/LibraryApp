@@ -43,9 +43,9 @@ public class BuyBookActivity extends AppCompatActivity {
         binding.tvtBAuthor.setText("Tác giả: " + book.getAuthor());
         binding.tvtBPublishComp.setText("NXB: " + book.getPublish_comp());
         binding.tvtBPublishYear.setText("Năm: " + book.getPublish_date());
-        binding.tvtBCategory.setText("Thể loại: " + book.getCategory());
-        binding.tvtBType.setText("Loại: " + book.getType());
-        binding.tvtBFaculty.setText("Ngành: " + book.getFaculty());
+        //binding.tvtBCategory.setText("Thể loại: " + book.getCategory());
+        //binding.tvtBType.setText("Loại: " + book.getType());
+        //binding.tvtBFaculty.setText("Ngành: " + book.getFaculty());
         binding.tvtBookPrice.setText("Giá: " + book.getPrice() + " VND");
 
         binding.editQuality.addTextChangedListener(new TextWatcher() {

@@ -59,7 +59,7 @@ public class StudentBookDetailActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), FindBookFragment.class);
+                Intent intent = new Intent(getApplicationContext(), StudentMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,6 +74,14 @@ public class StudentBookDetailActivity extends AppCompatActivity {
             }
         });
 
-
+        binding.btnBorrowBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),BorrowBookActivity.class);
+                intent.putExtra("id_student", id_user);
+                intent.putExtra("id_book", id_book);
+                startActivity(intent);
+            }
+        });
     }
 }
