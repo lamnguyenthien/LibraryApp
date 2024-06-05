@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import lam.tutorials.libraryapp.R;
@@ -57,6 +58,7 @@ public class RegisFormFragment extends Fragment {
         String role = u.getRole();
         formList = new ArrayList<>();
         formList = LibAppDatabase.getInstance(getContext()).formDAO().getListFormByIdUser(id_user);
+        Collections.reverse(formList);
         adapter = new FormAdapter(getContext(),formList,id_user,role);
         binding.recyclerView.setAdapter(adapter);
     }
