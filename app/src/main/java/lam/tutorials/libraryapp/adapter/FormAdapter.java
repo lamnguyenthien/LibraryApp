@@ -54,13 +54,15 @@ public class FormAdapter extends RecyclerView.Adapter<MyFormViewHolder>
         holder.tvUserName.setText(LibAppDatabase.getInstance(context.getApplicationContext()).userDAO().getNameById(formlist.get(position).getId_user()));
         holder.tvStatus.setText("Trạng thái: " + formlist.get(position).getStatus());
         holder.tvQuality.setText("Số lượng: " + formlist.get(position).getQuality());
-        holder.tvTotal.setText("Trạng thái: " + formlist.get(position).getStatus());
+
         if(formlist.get(position).getType().equals("BuyForm")) {
             holder.tvRegisDate.setText("Ngày mua: " + formlist.get(position).getRegis_date());
+            holder.tvTotal.setText("Tổng tiền: " + formlist.get(position).getTotal() + " VND");
             //holder.tvReceiveDate.setVisibility(View.GONE);
             //holder.tvReturnDate.setVisibility(View.GONE);
             holder.tableRow.setVisibility(View.GONE);
         }else if (formlist.get(position).getType().equals("BorrowForm")){
+            holder.tvTotal.setText("Tiền ứng: " + formlist.get(position).getTotal() + " VND");
             holder.tvRegisDate.setText("Ngày đăng ký: " + formlist.get(position).getRegis_date());
             holder.tvReceiveDate.setText("Ngày nhận: " + formlist.get(position).getReceive_date());
             holder.tvReturnDate.setText("Ngày trả: " + formlist.get(position).getReturn_date());
@@ -72,7 +74,7 @@ public class FormAdapter extends RecyclerView.Adapter<MyFormViewHolder>
         return formlist.size();
     }
 
-    public void changDataList(ArrayList<Form> CurrentFormList) {
+    public void changDataList(List<Form> CurrentFormList) {
         formlist = CurrentFormList;
         notifyDataSetChanged();
     }

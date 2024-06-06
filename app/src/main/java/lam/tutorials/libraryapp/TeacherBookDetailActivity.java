@@ -18,26 +18,6 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
     ActivityTeacherBookDetailBinding binding;
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        binding = ActivityTeacherBookDetailBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        Intent intent = getIntent();
-        int id_book = intent.getIntExtra("id_book", 0);
-        Book cBook = LibAppDatabase.getInstance(this).bookDAO().getBookById(id_book);
-        binding.editBookName.setText(cBook.getName());
-        binding.editBookYear.setText(cBook.getPublish_date());
-        binding.editBookAuthor.setText(cBook.getAuthor());
-        binding.editPublishComp.setText(cBook.getPublish_comp());
-        binding.editBookType.setText(cBook.getType());
-        binding.editBookCategory.setText(cBook.getCategory());
-        binding.editBookFaculty.setText(cBook.getFaculty());
-        binding.editBookQualityStock.setText(String.valueOf(cBook.getQuality_stock()));
-        binding.editBookQualityBorrow.setText(String.valueOf(cBook.getQuality_borrow()));
-        binding.editBookPrice.setText(String.valueOf(cBook.getPrice()));
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTeacherBookDetailBinding.inflate(getLayoutInflater());
@@ -55,13 +35,24 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
         binding.editBookQualityStock.setText(String.valueOf(cBook.getQuality_stock()));
         binding.editBookQualityBorrow.setText(String.valueOf(cBook.getQuality_borrow()));
         binding.editBookPrice.setText(String.valueOf(cBook.getPrice()));
+
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),TeacherMainActivity.class);
+                intent.putExtra("fragment","managebook");
+                startActivity(intent);
+            }
+        });
+
+
         binding.btnDeleteBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Book dBook = LibAppDatabase.getInstance(getApplicationContext()).bookDAO().getBookById(id_book);
                 LibAppDatabase.getInstance(getApplicationContext()).bookDAO().deleteBook(dBook);
                 Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), ManageBookFragment.class);
+                Intent intent = new Intent(getApplicationContext(),TeacherMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,18 +91,10 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
                     oBook.setPrice(price_book);
                     LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(oBook);
                     Toast.makeText(getApplicationContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(),TeacherMainActivity.class);
+                    startActivity(intent);
                 }
             }
         });
-
-        binding.btnBackTeacher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TeacherMainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
 }

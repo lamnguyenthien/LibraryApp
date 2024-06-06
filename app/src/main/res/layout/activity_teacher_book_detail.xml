@@ -18,7 +18,7 @@
             android:text="Quay về"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:id="@+id/btnBackTeacher"/>
+            android:id="@+id/btn_back"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -282,7 +282,7 @@
             android:layout_marginTop="10dp">
 
             <Button
-                android:id="@+id/btnUpdateBook"
+                android:id="@+id/btn_update_book"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
@@ -291,7 +291,7 @@
                 android:layout_marginRight="5dp"/>
 
             <Button
-                android:id="@+id/btnDeleteBook"
+                android:id="@+id/btn_delete_book"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"

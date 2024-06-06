@@ -109,7 +109,7 @@ public class BuyBookActivity extends AppCompatActivity {
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BuyBookActivity.this, StudentBookDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
                 startActivity(intent);
             }
         });

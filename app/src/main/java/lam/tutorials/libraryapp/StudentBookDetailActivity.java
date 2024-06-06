@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import lam.tutorials.libraryapp.database.LibAppDatabase;
@@ -16,23 +17,12 @@ public class StudentBookDetailActivity extends AppCompatActivity {
 
     ActivityStudentBookDetailBinding binding;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Intent intent = getIntent();
-        int id_book = intent.getIntExtra("id_book", 0);
-        int id_user = intent.getIntExtra("id_student",0);
-        Book book = LibAppDatabase.getInstance(this).bookDAO().getBookById(id_book);
-        User user = LibAppDatabase.getInstance(this).userDAO().getUserById(id_user);
-        binding.tvtBookStock.setText("Còn: " + book.getQuality_stock());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStudentBookDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         Intent intent = getIntent();
         int id_book = intent.getIntExtra("id_book", 0);
         int id_user = intent.getIntExtra("id_student",0);

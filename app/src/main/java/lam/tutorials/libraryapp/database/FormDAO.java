@@ -13,12 +13,18 @@ public interface FormDAO {
     @Insert
     void insertForm(Form form);
 
-    @Query("SELECT * FROM Form")
+    @Query("SELECT * FROM form")
     List<Form> getListForm();
 
-    @Query("SELECT * FROM Form WHERE id_user = :id_user")
+    @Query("SELECT * FROM form WHERE type = :type")
+    List<Form> getListFormByType(String type);
+
+    @Query("SELECT * FROM form WHERE type = :type AND status = :status")
+    List<Form> getListFormByStatus(String type, String status);
+
+    @Query("SELECT * FROM form WHERE id_user = :id_user")
     List<Form> getListFormByIdUser(int id_user);
 
-    @Query("DELETE FROM Form")
+    @Query("DELETE FROM form")
     void deleteAllForm();
 }

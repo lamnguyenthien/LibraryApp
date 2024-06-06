@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,23 +25,25 @@ public class TeacherMainActivity extends AppCompatActivity {
 
     ActivityTeacherMainBinding binding;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTeacherMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Bundle extras = getIntent().getExtras();
-        int id_user = extras.getInt("id_user", 0); // Đặt giá trị mặc định nếu không có
-        String name_user = extras.getString("name_user");
+        Intent intent = getIntent();
+        int id_user = intent.getIntExtra("id_user", 0);
+        String name_user = intent.getStringExtra("name_user");
         binding.toolbarGreet.setTitle("Xin chào, " + name_user);
-
 
         Bundle bundle_create = new Bundle();
         bundle_create.putInt("id_user", id_user);
         ManageFormFragment manageFormFragment_create = new ManageFormFragment();
         manageFormFragment_create.setArguments(bundle_create);
         replaceFragment(manageFormFragment_create);
+
         binding.bottomNavigationView.setBackground(null);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
