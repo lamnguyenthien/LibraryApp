@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,8 +31,11 @@ public class RegisFormFragment extends Fragment {
     FragmentRegisFormBinding binding;
     RecyclerView recyclerView;
     List<Form> formList;
+    List<Form> borrowFormList;
+    List<Form> buyFormList;
     FormAdapter adapter;
     private int id_user;
+    ArrayAdapter arrayAdapter = null;
 
 
     @Override
@@ -56,10 +61,77 @@ public class RegisFormFragment extends Fragment {
         binding.recyclerView.setLayoutManager(gridLayoutManager);
         User u = LibAppDatabase.getInstance(getContext()).userDAO().getUserById(id_user);
         String role = u.getRole();
+
         formList = new ArrayList<>();
-        formList = LibAppDatabase.getInstance(getContext()).formDAO().getListFormByIdUser(id_user);
+        buyFormList = new ArrayList<>();
+        borrowFormList = new ArrayList<>();
+        formList = LibAppDatabase.getInstance(getContext()).formDAO().getListForm();
+        buyFormList = LibAppDatabase.getInstance(getContext()).formDAO().getListFormByType("BuyForm");
+        borrowFormList = LibAppDatabase.getInstance(getContext()).formDAO().getListFormByType("BorrowForm");
         Collections.reverse(formList);
+        Collections.reverse(buyFormList);
+        Collections.reverse(borrowFormList);
+
         adapter = new FormAdapter(getContext(),formList,id_user,role);
         binding.recyclerView.setAdapter(adapter);
+
+        binding.tablerowStatus.setVisibility(View.GONE);
+
+
+        arrayAdapter = ArrayAdapter.createFromResource(getContext(), R.array.formstatusfilter, android.R.layout.simple_spinner_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinStatus.setAdapter(arrayAdapter);
+
+
+
+        binding.spinStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String status = (String) parent.getItemAtPosition(position);
+                if(status.equals("Tất cả")) {
+                    adapter.changDataList(borrowFormList);
+                }else{
+                    filterListStatus(status);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        binding.btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.changDataList(buyFormList);
+                binding.tablerowStatus.setVisibility(View.GONE);
+            }
+        });
+
+        binding.btnBorrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.changDataList(borrowFormList);
+                binding.tablerowStatus.setVisibility(View.VISIBLE);
+            }
+        });
+
+        binding.btnAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.changDataList(formList);
+                binding.tablerowStatus.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    public void filterListStatus(String status) {
+        ArrayList<Form> filterListStatus = new ArrayList<>();
+        for(Form form:borrowFormList) {
+            if(form.getStatus().toLowerCase().equals(status.toLowerCase())) {
+                filterListStatus.add(form);
+            }
+        }
+        adapter.changDataList(filterListStatus);
     }
 }

@@ -16,7 +16,6 @@ public class Form {
     private String receive_date;
     private String return_date;
     private String type;
-
     private long total;
 
     public Form(int id_book, int id_user, int quality, String status, String regis_date, String receive_date, String return_date, String type, long total) {
