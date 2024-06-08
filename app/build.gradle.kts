@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "lam.tutorials.libraryapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -53,6 +53,8 @@ dependencies {
     // For control over item selection of both touch and mouse driven selection
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
+    implementation ("org.apache.poi:poi:5.2.2")
+    implementation ("org.apache.poi:poi-ooxml:5.2.2")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0")
