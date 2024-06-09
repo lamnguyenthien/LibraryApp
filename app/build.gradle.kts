@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "lam.tutorials.libraryapp"
+        namespace = "lam.tutorials.libraryapp"
     compileSdk = 34
 
     defaultConfig {
@@ -14,6 +14,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
+            }
+        }
     }
 
     buildTypes {
