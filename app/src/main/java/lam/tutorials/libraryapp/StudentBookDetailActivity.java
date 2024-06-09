@@ -17,6 +17,16 @@ public class StudentBookDetailActivity extends AppCompatActivity {
 
     ActivityStudentBookDetailBinding binding;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        int id_book = intent.getIntExtra("id_book", 0);
+        int id_user = intent.getIntExtra("id_student",0);
+        Book book = LibAppDatabase.getInstance(this).bookDAO().getBookById(id_book);
+        User user = LibAppDatabase.getInstance(this).userDAO().getUserById(id_user);
+        binding.tvtBookStock.setText("Còn: " + book.getQuality_stock());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +51,7 @@ public class StudentBookDetailActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), StudentMainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

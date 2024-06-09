@@ -27,6 +27,8 @@ public class BorrowBookActivity extends AppCompatActivity {
     String selectedDate;
     String returnDate = "";
     String receiveDate = "";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,8 +160,9 @@ public class BorrowBookActivity extends AppCompatActivity {
                             LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(cbook);
                             LibAppDatabase.getInstance(getApplicationContext()).formDAO().insertForm(borrowform);
                             Toast.makeText(getApplicationContext(), "Đăng ký mượn thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
-                            startActivity(intent);
+                            //Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
+                            //startActivity(intent);
+                            finish();
                         }
                     }
                 }
@@ -169,8 +172,7 @@ public class BorrowBookActivity extends AppCompatActivity {
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

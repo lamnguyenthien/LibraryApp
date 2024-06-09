@@ -99,8 +99,9 @@ public class BuyBookActivity extends AppCompatActivity {
                         LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(cbook);
                         LibAppDatabase.getInstance(getApplicationContext()).formDAO().insertForm(buyform);
                         Toast.makeText(getApplicationContext(), "Mua thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
-                        startActivity(intent);
+                        //Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
+                        //startActivity(intent);
+                        finish();
                     }
                 }
             }
@@ -109,8 +110,7 @@ public class BuyBookActivity extends AppCompatActivity {
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

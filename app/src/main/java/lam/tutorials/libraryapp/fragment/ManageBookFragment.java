@@ -55,6 +55,17 @@ public class ManageBookFragment extends Fragment {
     private static final int REQUEST_CODE = 123;
 
     @Override
+    public void onResume() {
+        super.onResume();
+        User u = LibAppDatabase.getInstance(getContext()).userDAO().getUserById(id_user);
+        String role = u.getRole();
+        bookList = new ArrayList<>();
+        bookList = LibAppDatabase.getInstance(getContext()).bookDAO().getListBook();
+        adapter = new BookAdapter(getContext(),bookList,id_user, role);
+        binding.recyclerView.setAdapter(adapter);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(getArguments()!=null) {

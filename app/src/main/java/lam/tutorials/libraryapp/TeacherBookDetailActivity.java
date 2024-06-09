@@ -39,9 +39,7 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),TeacherMainActivity.class);
-                intent.putExtra("fragment","managebook");
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -52,8 +50,7 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
                 Book dBook = LibAppDatabase.getInstance(getApplicationContext()).bookDAO().getBookById(id_book);
                 LibAppDatabase.getInstance(getApplicationContext()).bookDAO().deleteBook(dBook);
                 Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(),TeacherMainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -91,8 +88,9 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
                     oBook.setPrice(price_book);
                     LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(oBook);
                     Toast.makeText(getApplicationContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(),TeacherMainActivity.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(getApplicationContext(),TeacherMainActivity.class);
+                    //startActivity(intent);
+                    finish();
                 }
             }
         });
