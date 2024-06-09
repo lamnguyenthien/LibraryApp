@@ -28,7 +28,7 @@ public class FindBookFragment extends Fragment {
 
     FragmentFindBookBinding binding;
     RecyclerView recyclerView;
-    List<Book> bookList;
+    List<Book> bookListEnable;
     SearchView searchView;
     private int id_user;
     BookAdapter adapter;
@@ -48,9 +48,9 @@ public class FindBookFragment extends Fragment {
         binding.recyclerView.setLayoutManager(gridLayoutManager);
         User u = LibAppDatabase.getInstance(getContext()).userDAO().getUserById(id_user);
         String role = u.getRole();
-        bookList = new ArrayList<>();
-        bookList = LibAppDatabase.getInstance(getContext()).bookDAO().getListBook();
-        adapter = new BookAdapter(getContext(), bookList, id_user, role);
+        bookListEnable = new ArrayList<>();
+        bookListEnable = LibAppDatabase.getInstance(getContext()).bookDAO().getListBookEnable();
+        adapter = new BookAdapter(getContext(), bookListEnable, id_user, role);
         binding.recyclerView.setAdapter(adapter);
     }
 
@@ -72,9 +72,9 @@ public class FindBookFragment extends Fragment {
         binding.recyclerView.setLayoutManager(gridLayoutManager);
         User u = LibAppDatabase.getInstance(getContext()).userDAO().getUserById(id_user);
         String role = u.getRole();
-        bookList = new ArrayList<>();
-        bookList = LibAppDatabase.getInstance(getContext()).bookDAO().getListBook();
-        adapter = new BookAdapter(getContext(), bookList, id_user, role);
+        bookListEnable = new ArrayList<>();
+        bookListEnable = LibAppDatabase.getInstance(getContext()).bookDAO().getListBookEnable();
+        adapter = new BookAdapter(getContext(), bookListEnable, id_user, role);
         binding.recyclerView.setAdapter(adapter);
 
         binding.search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -94,7 +94,7 @@ public class FindBookFragment extends Fragment {
 
     public void searchList(String text) {
         ArrayList<Book> searchList = new ArrayList<>();
-        for (Book book : bookList) {
+        for (Book book : bookListEnable) {
             if (book.getName().toLowerCase().contains(text.toLowerCase())) {
                 searchList.add(book);
             }

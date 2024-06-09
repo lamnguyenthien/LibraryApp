@@ -48,7 +48,7 @@ public class ManageBookFragment extends Fragment {
     FragmentManageBookBinding binding;
     RecyclerView recyclerView;
     List<Book> bookList;
-
+    List<Book> bookListEnable;
     SearchView searchView;
     private int id_user;
     BookAdapter adapter;
@@ -59,9 +59,9 @@ public class ManageBookFragment extends Fragment {
         super.onResume();
         User u = LibAppDatabase.getInstance(getContext()).userDAO().getUserById(id_user);
         String role = u.getRole();
-        bookList = new ArrayList<>();
-        bookList = LibAppDatabase.getInstance(getContext()).bookDAO().getListBook();
-        adapter = new BookAdapter(getContext(),bookList,id_user, role);
+        bookListEnable = new ArrayList<>();
+        bookListEnable = LibAppDatabase.getInstance(getContext()).bookDAO().getListBookEnable();
+        adapter = new BookAdapter(getContext(),bookListEnable,id_user, role);
         binding.recyclerView.setAdapter(adapter);
     }
 
@@ -93,7 +93,9 @@ public class ManageBookFragment extends Fragment {
         String role = u.getRole();
         bookList = new ArrayList<>();
         bookList = LibAppDatabase.getInstance(getContext()).bookDAO().getListBook();
-        adapter = new BookAdapter(getContext(),bookList,id_user, role);
+        bookListEnable = new ArrayList<>();
+        bookListEnable = LibAppDatabase.getInstance(getContext()).bookDAO().getListBookEnable();
+        adapter = new BookAdapter(getContext(),bookListEnable,id_user, role);
         binding.recyclerView.setAdapter(adapter);
 
 
@@ -129,7 +131,7 @@ public class ManageBookFragment extends Fragment {
                     // Tiếp tục với quá trình xuất dữ liệu
                     exportToExcel(bookList);
                 }*/
-
+                bookList = LibAppDatabase.getInstance(getContext()).bookDAO().getListBook();
                 exportToExcel(bookList);
 
             }
@@ -138,7 +140,7 @@ public class ManageBookFragment extends Fragment {
 
     public void searchList(String text) {
         ArrayList<Book> searchList = new ArrayList<>();
-        for(Book book:bookList) {
+        for(Book book:bookListEnable) {
             if(book.getName().toLowerCase().contains(text.toLowerCase())) {
                 searchList.add(book);
             }

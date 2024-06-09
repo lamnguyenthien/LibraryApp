@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import lam.tutorials.libraryapp.database.LibAppDatabase;
 import lam.tutorials.libraryapp.databinding.ActivityStudentBookDetailBinding;
 import lam.tutorials.libraryapp.entity.Book;
 import lam.tutorials.libraryapp.entity.User;
-import lam.tutorials.libraryapp.fragment.FindBookFragment;
 
 public class StudentBookDetailActivity extends AppCompatActivity {
 
@@ -58,7 +56,7 @@ public class StudentBookDetailActivity extends AppCompatActivity {
         binding.btnBuyBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),BuyBookActivity.class);
+                Intent intent = new Intent(getApplicationContext(), BuyBookActivity.class);
                 intent.putExtra("id_student", id_user);
                 intent.putExtra("id_book", id_book);
                 startActivity(intent);
@@ -68,7 +66,7 @@ public class StudentBookDetailActivity extends AppCompatActivity {
         binding.btnBorrowBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),BorrowBookActivity.class);
+                Intent intent = new Intent(getApplicationContext(), BorrowBookActivity.class);
                 intent.putExtra("id_student", id_user);
                 intent.putExtra("id_book", id_book);
                 startActivity(intent);
