@@ -25,6 +25,9 @@ public interface BookDAO {
     @Query("SELECT * FROM book")
     List<Book> getListBook();
 
+    @Query("SELECT * FROM book WHERE enable = 1")
+    List<Book> getListBookEnable();
+
     @Query("SELECT * FROM book WHERE id = :id")
     Book getBookById(int id);
 

@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import lam.tutorials.libraryapp.entity.*;
 
-@Database(entities = {User.class,Book.class, Form.class},version = 2)
+@Database(entities = {User.class,Book.class, Form.class},version = 3)
 public abstract class LibAppDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "libraryapp.dp";

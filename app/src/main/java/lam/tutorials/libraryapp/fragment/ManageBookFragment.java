@@ -157,7 +157,7 @@ public class ManageBookFragment extends Fragment {
         Sheet sheet = workbook.createSheet("BookList_" + currentDate);
 
         Row headerRow = sheet.createRow(0);
-        String[] headers = {"Id", "Tên sách", "Tác giả", "NXB", "Năm xuất bản", "Thể loại", "Loại", "Ngành", "Còn", "Đang mượn"};
+        String[] headers = {"Id", "Tên sách", "Tác giả", "NXB", "Năm xuất bản", "Thể loại", "Loại", "Ngành", "Còn", "Đang mượn","Trạng thái"};
         for (int i = 0; i < headers.length; i++) {
             Cell headerCell = headerRow.createCell(i);
             headerCell.setCellValue(headers[i]);
@@ -176,6 +176,7 @@ public class ManageBookFragment extends Fragment {
             dataRow.createCell(7).setCellValue(book.getFaculty());
             dataRow.createCell(8).setCellValue(book.getQuality_stock());
             dataRow.createCell(9).setCellValue(book.getQuality_borrow());
+            dataRow.createCell(10).setCellValue(book.getEnable());
         }
 
         try{

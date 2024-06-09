@@ -48,7 +48,8 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Book dBook = LibAppDatabase.getInstance(getApplicationContext()).bookDAO().getBookById(id_book);
-                LibAppDatabase.getInstance(getApplicationContext()).bookDAO().deleteBook(dBook);
+                dBook.setEnable(0);
+                LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(dBook);
                 Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -88,8 +89,6 @@ public class TeacherBookDetailActivity extends AppCompatActivity {
                     oBook.setPrice(price_book);
                     LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(oBook);
                     Toast.makeText(getApplicationContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
-                    //Intent intent = new Intent(getApplicationContext(),TeacherMainActivity.class);
-                    //startActivity(intent);
                     finish();
                 }
             }

@@ -44,23 +44,23 @@ public class SignupActivity extends AppCompatActivity {
                             if(checkCode(code,SignupActivity.this)) {
                                 Toast.makeText(SignupActivity.this, "Mã sinh viên đã đăng ký", Toast.LENGTH_SHORT).show();
                             }else{
-                                User nUser = new User(code, email, name, role, password);
+                                User nUser = new User(code, email, name, role, password,1);
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
-                                nUser = new User("2021604260", "tranduchuy@gmail.com", "Trần Đức Huy", "Student", "123456");
+                                nUser = new User("2021604260", "tranduchuy@gmail.com", "Trần Đức Huy", "Student", "123456",1);
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
-                                nUser = new User("2021604263", "nguyenminhhieu@gmail.com", "Nguyễn Minh Hiếu", "Student", "123456");
+                                nUser = new User("2021604263", "nguyenminhhieu@gmail.com", "Nguyễn Minh Hiếu", "Student", "123456",1);
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
-                                nUser = new User("2021604264", "trinhgialoc@gmail.com", "Trịnh Gia Lộc", "Student", "123456");
+                                nUser = new User("2021604264", "trinhgialoc@gmail.com", "Trịnh Gia Lộc", "Student", "123456",1);
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
-                                nUser = new User("GV_01", "hoangquanghuy@gmail.com", "Hoàng Quang Huy", "Teacher", "123456");
+                                nUser = new User("GV_01", "hoangquanghuy@gmail.com", "Hoàng Quang Huy", "Teacher", "123456",1);
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
-                                nUser = new User("GV_02", "vuthiduong@gmail.com", "Vũ Thị Dương", "Teacher", "123456");
+                                nUser = new User("GV_02", "vuthiduong@gmail.com", "Vũ Thị Dương", "Teacher", "123456",1);
                                 LibAppDatabase.getInstance(SignupActivity.this).userDAO().insertUser(nUser);
-                                Book nBook = new Book("Nguyên lý hệ điều hành", "Nguyễn Bá Nghiễn", "2020", "Kim Đồng", 20, 2, "Khoa học", "Giáo trình", "CNTT",20000);
+                                Book nBook = new Book("Nguyên lý hệ điều hành", "Nguyễn Bá Nghiễn", "2020", "Kim Đồng", 20, 2, "Khoa học", "Giáo trình", "CNTT",20000,1);
                                 LibAppDatabase.getInstance(SignupActivity.this).bookDAO().insertBook(nBook);
-                                nBook = new Book("Phát triển ứng dụng di động", "Nguyễn Bá Nghiễn", "2022", "Thống kê", 22, 2, "Khoa học", "Giáo trình", "CNTT",20000);
+                                nBook = new Book("Phát triển ứng dụng di động", "Nguyễn Bá Nghiễn", "2022", "Thống kê", 22, 2, "Khoa học", "Giáo trình", "CNTT",20000,1);
                                 LibAppDatabase.getInstance(SignupActivity.this).bookDAO().insertBook(nBook);
-                                nBook = new Book("Giàu từ chứng khoán", "John Boik", "2016", "Lao động", 22, 2, "Kinh tế", "Sách", "Không",79000);
+                                nBook = new Book("Giàu từ chứng khoán", "John Boik", "2016", "Lao động", 22, 2, "Kinh tế", "Sách", "Không",79000,1);
                                 LibAppDatabase.getInstance(SignupActivity.this).bookDAO().insertBook(nBook);
                                 Toast.makeText(SignupActivity.this,"Đăng ký thành công",Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);

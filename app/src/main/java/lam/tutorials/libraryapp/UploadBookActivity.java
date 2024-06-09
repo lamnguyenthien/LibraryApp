@@ -48,7 +48,7 @@ public class UploadBookActivity extends AppCompatActivity {
                     if(checkBookIsExist(name,publish_date,author,publish_comp,UploadBookActivity.this)) {
                         Toast.makeText(UploadBookActivity.this,"Sách đã tồn tại",Toast.LENGTH_LONG).show();
                     }else{
-                        Book nBook = new Book(name, author, publish_date, publish_comp, quality_stock, quality_borrow, category, type, faculty,price);
+                        Book nBook = new Book(name, author, publish_date, publish_comp, quality_stock, quality_borrow, category, type, faculty,price,1);
                         LibAppDatabase.getInstance(UploadBookActivity.this).bookDAO().insertBook(nBook);
                         Toast.makeText(UploadBookActivity.this,"Thêm thành công",Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), TeacherMainActivity.class);

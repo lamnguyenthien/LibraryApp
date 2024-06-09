@@ -18,10 +18,11 @@ public class Book {
     private String category;
     private String type;
     private String faculty;
-
     private long price;
 
-    public Book(String name, String author, String publish_date, String publish_comp, int quality_stock, int quality_borrow, String category, String type, String faculty, long price) {
+    private int enable;
+
+    public Book(String name, String author, String publish_date, String publish_comp, int quality_stock, int quality_borrow, String category, String type, String faculty, long price, int enable) {
         this.name = name;
         this.author = author;
         this.publish_date = publish_date;
@@ -32,6 +33,7 @@ public class Book {
         this.type = type;
         this.faculty = faculty;
         this.price = price;
+        this.enable = enable;
     }
 
     public Book() {
@@ -123,5 +125,13 @@ public class Book {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    public int getEnable() {
+        return enable;
+    }
+
+    public void setEnable(int enable) {
+        this.enable = enable;
     }
 }
