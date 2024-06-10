@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextWatcher;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.Toast;
@@ -88,19 +89,18 @@ public class BuyBookActivity extends AppCompatActivity {
                     }else{
                         long total = quality * cbook.getPrice();
                         //Calendar calendar = Calendar.getInstance();
-
                         Date date = new Date();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         String currentDate = dateFormat.format(date);
-
                         Form buyform = new Form(id_book, id_student, quality, "Đã bán", currentDate, null,null, "BuyForm", total);
                         int stock = cbook.getQuality_stock() - quality;
                         cbook.setQuality_stock(stock);
                         LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(cbook);
-                        LibAppDatabase.getInstance(getApplicationContext()).formDAO().insertForm(buyform);
+                        long new_id = LibAppDatabase.getInstance(getApplicationContext()).formDAO().insertForm(buyform);
+                        Form newForm = LibAppDatabase.getInstance(getApplicationContext()).formDAO().getFormById(new_id);
+                        newForm.setCode(newForm.getType()+"_"+newForm.getId());
+                        LibAppDatabase.getInstance(getApplicationContext()).formDAO().updateForm(newForm);
                         Toast.makeText(getApplicationContext(), "Mua thành công", Toast.LENGTH_SHORT).show();
-                        //Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
-                        //startActivity(intent);
                         finish();
                     }
                 }

@@ -26,14 +26,31 @@
         android:textStyle="bold"
         android:padding="6dp"/>
 
-    <TextView
-        android:id="@+id/tv_form_status"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Trạng thái: "
-        android:textSize="13sp"
-        android:textStyle="bold"
-        android:padding="6dp"/>
+        android:weightSum="2"
+        android:padding="6dp">
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Code: "
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_form_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Trạng thái: "
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+
 
     <TableRow
         android:layout_width="match_parent"

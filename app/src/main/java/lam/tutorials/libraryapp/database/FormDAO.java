@@ -12,7 +12,7 @@ import lam.tutorials.libraryapp.entity.Form;
 @Dao
 public interface FormDAO {
     @Insert
-    void insertForm(Form form);
+    long insertForm(Form form);
 
     @Update
     void updateForm(Form form);
@@ -21,7 +21,7 @@ public interface FormDAO {
     List<Form> getListForm();
 
     @Query("SELECT * FROM form WHERE id = :id_form")
-    Form getFormById(int id_form);
+    Form getFormById(long id_form);
 
     @Query("SELECT * FROM form WHERE type = :type")
     List<Form> getListFormByType(String type);

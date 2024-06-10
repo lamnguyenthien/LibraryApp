@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +52,7 @@ public class ManageFormFragment extends Fragment {
     private int id_user;
     ArrayAdapter arrayAdapter = null;
 
+    private int fil =1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,6 +119,7 @@ public class ManageFormFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adapter.changDataList(buyFormList);
+                fil = 2;
                 binding.tablerowStatus.setVisibility(View.GONE);
             }
         });
@@ -125,6 +128,7 @@ public class ManageFormFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adapter.changDataList(borrowFormList);
+                fil = 3;
                 borrowFormList = LibAppDatabase.getInstance(getContext()).formDAO().getListFormByType("BorrowForm");
                 binding.tablerowStatus.setVisibility(View.VISIBLE);
             }
@@ -134,6 +138,7 @@ public class ManageFormFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adapter.changDataList(formList);
+                fil = 1;
                 binding.tablerowStatus.setVisibility(View.GONE);
             }
         });
@@ -146,6 +151,19 @@ public class ManageFormFragment extends Fragment {
                 exportToExcecl(buyFormList,borrowFormList);
             }
         });
+
+        binding.searchForm.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchListForm(newText);
+                return true;
+            }
+        });
     }
 
     public void filterListStatus(String status) {
@@ -156,6 +174,32 @@ public class ManageFormFragment extends Fragment {
             }
         }
         adapter.changDataList(filterListStatus);
+    }
+
+    private void searchListForm(String text) {
+        ArrayList<Form> searchList = new ArrayList<>();
+        if(fil == 1) {
+            for(Form form:formList) {
+                if(form.getCode().toLowerCase().contains(text.toLowerCase())) {
+                    searchList.add(form);
+                    Log.d("Test_fil1","Add");
+                }
+                Log.d("Test_fil1","Hello");
+            }
+        }else if(fil == 2) {
+            for(Form form:buyFormList) {
+                if(form.getCode().toLowerCase().contains(text.toLowerCase())) {
+                    searchList.add(form);
+                }
+            }
+        }else if(fil==3) {
+            for(Form form:borrowFormList) {
+                if(form.getCode().toLowerCase().contains(text.toLowerCase())) {
+                    searchList.add(form);
+                }
+            }
+        }
+        adapter.changDataList(searchList);
     }
 
     private void exportToExcecl(List<Form> buyFormList, List<Form> borrowFormList) {

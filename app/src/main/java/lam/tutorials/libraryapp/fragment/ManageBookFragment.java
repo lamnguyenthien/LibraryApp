@@ -138,7 +138,7 @@ public class ManageBookFragment extends Fragment {
         });
     }
 
-    public void searchList(String text) {
+    private void searchList(String text) {
         ArrayList<Book> searchList = new ArrayList<>();
         for(Book book:bookListEnable) {
             if(book.getName().toLowerCase().contains(text.toLowerCase())) {

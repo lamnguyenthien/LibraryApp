@@ -53,7 +53,7 @@ public class FormAdapter extends RecyclerView.Adapter<MyFormViewHolder>
         holder.tvBookName.setText("Tên sách: " + LibAppDatabase.getInstance(context.getApplicationContext()).bookDAO().getNameBookById(formlist.get(position).getId_book()));
         holder.tvStatus.setText("Trạng thái: " + formlist.get(position).getStatus());
         holder.tvQuality.setText("Số lượng: " + formlist.get(position).getQuality());
-
+        holder.tvCode.setText("Code: " + formlist.get(position).getCode());
         if(role.equals("Student")) {
             holder.tvUserName.setVisibility(View.GONE);
             holder.btnChangeStatus.setVisibility(View.GONE);
@@ -134,7 +134,7 @@ public class FormAdapter extends RecyclerView.Adapter<MyFormViewHolder>
 
 class MyFormViewHolder extends RecyclerView.ViewHolder {
 
-    TextView tvBookName, tvUserName, tvStatus, tvQuality, tvTotal, tvRegisDate, tvReceiveDate, tvReturnDate;
+    TextView tvBookName, tvUserName, tvStatus, tvQuality, tvTotal, tvRegisDate, tvReceiveDate, tvReturnDate, tvCode;
     Button btnChangeStatus;
     LinearLayout formCard;
     TableRow tableRow;
@@ -150,6 +150,7 @@ class MyFormViewHolder extends RecyclerView.ViewHolder {
         tvRegisDate = itemView.findViewById(R.id.tv_regis_date);
         tvReceiveDate = itemView.findViewById(R.id.tv_receive_date);
         tvReturnDate = itemView.findViewById(R.id.tv_return_date);
+        tvCode = itemView.findViewById(R.id.tv_code);
         tableRow = itemView.findViewById(R.id.tableRow);
         btnChangeStatus = itemView.findViewById(R.id.btnChangeStatus);
 

@@ -18,6 +18,8 @@ public class Form {
     private String type;
     private long total;
 
+    private String code;
+
     public Form(int id_book, int id_user, int quality, String status, String regis_date, String receive_date, String return_date, String type, long total) {
         this.id_book = id_book;
         this.id_user = id_user;
@@ -29,6 +31,7 @@ public class Form {
         this.type = type;
         this.total = total;
     }
+
 
     public long getTotal() {
         return total;
@@ -108,5 +111,13 @@ public class Form {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

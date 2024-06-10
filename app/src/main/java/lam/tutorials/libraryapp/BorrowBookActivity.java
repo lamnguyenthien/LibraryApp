@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -158,10 +159,11 @@ public class BorrowBookActivity extends AppCompatActivity {
                             cbook.setQuality_stock(stock);
                             cbook.setQuality_borrow(borrow);
                             LibAppDatabase.getInstance(getApplicationContext()).bookDAO().updateBook(cbook);
-                            LibAppDatabase.getInstance(getApplicationContext()).formDAO().insertForm(borrowform);
+                            long new_id = LibAppDatabase.getInstance(getApplicationContext()).formDAO().insertForm(borrowform);
+                            Form newForm = LibAppDatabase.getInstance(getApplicationContext()).formDAO().getFormById(new_id);
+                            newForm.setCode(newForm.getType()+"_"+newForm.getId());
+                            LibAppDatabase.getInstance(getApplicationContext()).formDAO().updateForm(newForm);
                             Toast.makeText(getApplicationContext(), "Đăng ký mượn thành công", Toast.LENGTH_SHORT).show();
-                            //Intent intent = new Intent(getApplicationContext(), StudentBookDetailActivity.class);
-                            //startActivity(intent);
                             finish();
                         }
                     }
