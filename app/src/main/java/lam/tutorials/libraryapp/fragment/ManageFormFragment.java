@@ -14,10 +14,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import lam.tutorials.libraryapp.R;
@@ -125,6 +137,15 @@ public class ManageFormFragment extends Fragment {
                 binding.tablerowStatus.setVisibility(View.GONE);
             }
         });
+
+        binding.btnExportFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buyFormList = LibAppDatabase.getInstance(getContext()).formDAO().getListFormByType("BuyForm");
+                borrowFormList = LibAppDatabase.getInstance(getContext()).formDAO().getListFormByType("BorrowForm");
+                exportToExcecl(buyFormList,borrowFormList);
+            }
+        });
     }
 
     public void filterListStatus(String status) {
@@ -135,6 +156,74 @@ public class ManageFormFragment extends Fragment {
             }
         }
         adapter.changDataList(filterListStatus);
+    }
+
+    private void exportToExcecl(List<Form> buyFormList, List<Form> borrowFormList) {
+        //Lấy thời điểm hiện tại
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
+        String currentDate = dateFormat.format(date);
+
+        //Tạo file
+        Workbook workbook = new XSSFWorkbook();
+        Sheet buyFormSheet = workbook.createSheet("Buy Form");
+        Sheet borrowFormSheet = workbook.createSheet("Borrow Form");
+
+        Row headerRowBuy = buyFormSheet.createRow(0);
+        String[] headers = {"Id", "Id_book", "Id_user","Ngày mua","Số lượng","Thành tiền"};
+        for(int i = 0; i < headers.length; i++) {
+            Cell headerCell = headerRowBuy.createCell(i);
+            headerCell.setCellValue(headers[i]);
+        }
+
+        Row headerRowBorrow = borrowFormSheet.createRow(0);
+        String[] headers2 = {"Id", "Id_book", "Id_user","Ngày đăng ký","Ngày nhận","Ngày trả","Số lượng", "Tiền ứng"};
+        for(int i = 0; i < headers2.length;i++) {
+            Cell headerCell = headerRowBorrow.createCell(i);
+            headerCell.setCellValue(headers2[i]);
+        }
+
+        for(int i = 0; i < buyFormList.size(); i++) {
+            Form form = buyFormList.get(i);
+            Row dataRow = buyFormSheet.createRow(i+1);
+            dataRow.createCell(0).setCellValue(form.getId());
+            dataRow.createCell(1).setCellValue(form.getId_book());
+            dataRow.createCell(2).setCellValue(form.getId_user());
+            dataRow.createCell(3).setCellValue(form.getRegis_date());
+            dataRow.createCell(4).setCellValue(form.getQuality());
+            dataRow.createCell(5).setCellValue(form.getTotal());
+        }
+
+        for(int i = 0; i < borrowFormList.size(); i++) {
+            Form form = borrowFormList.get(i);
+            Row dataRow = borrowFormSheet.createRow(i+1);
+            dataRow.createCell(0).setCellValue(form.getId());
+            dataRow.createCell(1).setCellValue(form.getId_book());
+            dataRow.createCell(2).setCellValue(form.getId_user());
+            dataRow.createCell(3).setCellValue(form.getRegis_date());
+            dataRow.createCell(4).setCellValue(form.getReceive_date());
+            dataRow.createCell(5).setCellValue(form.getReturn_date());
+            dataRow.createCell(6).setCellValue(form.getQuality());
+            dataRow.createCell(7).setCellValue(form.getTotal());
+        }
+
+        try {
+            File file = new File(getContext().getExternalFilesDir(null),"FormList_"+currentDate+ ".xlsx");
+
+            if(file.getParentFile()!=null && !file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(file);
+            workbook.write(outputStream);
+            outputStream.flush();
+            outputStream.close();
+            Log.d("export_file", file.getAbsolutePath());
+            Toast.makeText(getContext(), "Xuất file thành công", Toast.LENGTH_LONG).show();
+        }catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Xuất file thất bại" + e, Toast.LENGTH_LONG).show();
+        }
     }
 
 
